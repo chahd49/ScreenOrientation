@@ -27,21 +27,17 @@ export default function App() {
  
       if (number === 4) { ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);}
  
-       if (number === 5) { ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);}
+       if (number === 5) { ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_DOWN);}
 
-       if (number === 6) { ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_DOWN);}
+       if (number === 6) { ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);}
  
   }, [number]);
  
-  return (
-<View><Text>Hello</Text><View style={styles.container}>
-  
-  
-  <Pressable onPress={() => changenumber()}><Text style={styles.paragraph}>    This number ({number}) should change the Orientation.</Text></Pressable>
+  return (<View><Text>Hello</Text><View style={styles.container}><Pressable onPress={() => changenumber()}><Text style={styles.paragraph}>    This number ({number}) should change the Orientation.</Text></Pressable>
   
   
   
-  {number===1 ? <View style={styles.background1}><Text style={styles.paragraph}> SHOW UP IF THE APP IS IN LANDSCAPE.</Text> </View>
+  {number===1 ? <View style={styles.background1}><Text style={styles.paragraph}> SHOW UP IF THE APP IS IN LANDSCAPE.</Text></View>
   
   
   
@@ -104,8 +100,7 @@ const styles = StyleSheet.create({
 
   background1: {
     margin: 24,
- 
-    height: 200,
+    height: 600,
     width: 300,
     justifyContent: 'center',
     backgroundColor: 'darkred',
@@ -115,7 +110,6 @@ const styles = StyleSheet.create({
 
   background2: {
     margin: 24,
- 
     height: 200,
     width: 300,
     justifyContent: 'center',
