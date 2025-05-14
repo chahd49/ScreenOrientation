@@ -49,9 +49,10 @@ export default function App() {
   
   
   : number=== 4 ?<View style={styles.container5}><Text style={styles.paragraph}>THIS IS WHAT WILL SHOW UP IF THE APP IS IN PORTRAIT_UP .</Text></View>
+
+  : number=== 5 ?<View style={styles.container5}><Text style={styles.paragraph}>THIS IS WHAT WILL SHOW UP IF THE APP IS IN PORTRAIT_DOWN .</Text></View>
   
-  
-  : number=== 5 ?<View style={styles.container6}><Text style={styles.paragraph}>THIS IS WHAT WILL SHOW UP IF THE APP IS IN PORTRAIT.</Text></View> : null}</View></View>);
+  : number=== 6 ?<View style={styles.container6}><Text style={styles.paragraph}>THIS IS WHAT WILL SHOW UP IF THE APP IS IN PORTRAIT.</Text></View> : null}</View></View>);
 }
 const styles = StyleSheet.create({
   container: {
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   background1: {
     margin: 24,
     height: 600,
-    width: 300,
+    width: 600,
     justifyContent: 'center',
     backgroundColor: 'darkred',
     padding: 8,
