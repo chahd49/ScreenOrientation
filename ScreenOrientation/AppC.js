@@ -1,81 +1,137 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Dimensions, Pressable } from 'react-native';
-import Constants from 'expo-constants';
-import * as ScreenOrientation from 'expo-screen-orientation';
-// You can import from local files
- 
-// or any pure javascript modules available in npm
-import { Card } from 'react-native-paper';
- 
+import { View, StyleSheet, Text, Dimensions, Button, ScrollView } from 'react-native';
+import { Video } from 'expo-av';
+
+const window = Dimensions.get('window');
+const screen = Dimensions.get('screen');
+
 export default function App() {
-  const [number, setNumber] = useState(1);
- 
-  const changenumber = () => {
-    if (number < 5) {
-      setNumber(number + 1);
-    } else {
-      setNumber(1);
-    }
+
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
+  const [dimensions, setDimensions] = useState({ window, screen });
+
+  const onChange = ({ window, screen }) => {
+    setDimensions({ window, screen });
+    console.log(dimensions);
   };
- 
+
   useEffect(() => {
-   if (number === 1) { ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);}
  
-    if (number === 2) { ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_LEFT);}
- 
-     if (number === 3) { ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT);}
- 
-      if (number === 4) { ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);}
- 
-       if (number === 5) { ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);}
- 
-  }, [number]);
- 
+    Dimensions.addEventListener('change', onChange);
+    return () => {
+     console.log("hello")
+    };
+  });
+
   return (
-<View><Text>Hello</Text><View style={styles.container}><Pressable onPress={() => changenumber()}><Text style={styles.paragraph}>This number ({number}) should change the Orientation.</Text></Pressable>{number===1 ? <View style={styles.container2}><Text style={styles.paragraph}> SHOW UP IF THE APP IS IN LANDSCAPE.</Text></View> : number=== 2 ?<View style={styles.container3}><Text style={styles.paragraph}>THIS IS WHAT WILL SHOW UP IF THE APP IS IN LANDSCAPE LEFT.</Text></View> : number=== 3 ? <View style={styles.container4}><Text style={styles.paragraph}>THIS IS WHAT WILL SHOW UP IF THE APP IS IN LANDSCAPE RIGHT.</Text></View> : number=== 4 ?<View style={styles.container5}><Text style={styles.paragraph}>THIS IS WHAT WILL SHOW UP IF THE APP IS IN PORTRAIT_UP .</Text></View> : number=== 5 ?<View style={styles.container6}><Text style={styles.paragraph}>THIS IS WHAT WILL SHOW UP IF THE APP IS IN PORTRAIT.</Text></View> : null}</View></View>);
-}
+    <View style={styles.container}>
+  
+      {dimensions.window.width > dimensions.window.height ? (
+        <View style={styles.container3}>
+          <ScrollView>
+          <Text>
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+            {'\n'}
+          </Text>
+          <Text
+            style={
+              styles.paragraph
+            }>{`Window Dimensions: height - ${dimensions.window.height} is smaller than width - ${Math.round(dimensions.window.width)}`}</Text>
+          <Text style={styles.paragraph}>
+            This is a place where you could have a description of the video or
+            some other information. Because the App is in "Portrait" the video
+            can only use the width of the screen. Therefore there is a lot of
+            left over space that can be used. When the phone is in LANDSCAPE View:    {'\n'}{'\n'}1. The Video should be taking up the whole screen. {'\n'}{'\n'}2. The Section should not be scrollable. {'\n'}{'\n'}3. Off to the right should be a play/pause button - OR you could make it so the video itself played/paused by touching the play/pause button in the video. 
+          </Text>
+
+          <Video
+            ref={video}
+            style={styles.video}
+            source={{
+              uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+            }}
+            useNativeControls
+            resizeMode="contain"
+            isLooping
+            onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+          />
+
+          <View style={styles.buttons}>
+            <Button
+              title={status.isPlaying ? 'Pause' : 'Play'}
+              onPress={() =>
+                status.isPlaying
+                  ? video.current.pauseAsync()
+                  : video.current.playAsync()
+              }
+            />
+          </View>
+          </ScrollView>
+        </View>
+      ) : (
+       
+        <View style={styles.container4}>
+          
+        <Text
+          style={
+            styles.paragraph
+          }>{`Window Dimensions: height - ${Math.round(dimensions.window.height)} is bigger than width - ${dimensions.window.width}`}</Text>
+          <Text style={
+            styles.paragraph
+          }>When the phone is in Portrait View:    {'\n'}{'\n'}1. You should have a text at the top of the screen that showcases the name of the video.   {'\n'}{'\n'}2. Then in the middle you should have the Video. {'\n'}{'\n'}3. Then at the bottom you should have a paragraph description of the Video{'\n'}{'\n'}4. Try to make the sections above and below the videos look nice with text making good use of the space</Text></View>
+      )}
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container3: {
+    flex: 1,
     justifyContent: 'center',
     backgroundColor: 'red',
-    padding: 8,
-    width: "100%"
+    padding: 2,
   },
-    container2: {
+  container4: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'darkred',
-    padding: 8,
-  },
-      container3: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'skyblue',
-    padding: 8,
-  },
-      container4: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'lightgrey',
-    padding: 8,
-  },
-      container5: {
-    flex: 1,
-    justifyContent: 'center',
- 
-    backgroundColor: 'lightgreen',
-    padding: 8,
-  },
-  container6: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'violet',
-    padding: 8
+    backgroundColor: 'red',
+    padding: 2,
   },
   paragraph: {
-    margin: 24,
+    margin: 4,
     fontSize: 18,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  video: {
+    alignSelf: 'center',
+    width: 350,
+    height: 220,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
