@@ -64,7 +64,7 @@ export default function App() {
             ref={video}
             style={styles.video}
             source={{
-              uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+              uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
             }}
             useNativeControls
             resizeMode="contain"
@@ -94,7 +94,18 @@ export default function App() {
           }>{`Window Dimensions: height - ${Math.round(dimensions.window.height)} is bigger than width - ${dimensions.window.width}`}</Text>
           <Text style={
             styles.paragraph
-          }>When the phone is in Portrait View:    {'\n'}{'\n'}1. You should have a text at the top of the screen that showcases the name of the video.   {'\n'}{'\n'}2. Then in the middle you should have the Video. {'\n'}{'\n'}3. Then at the bottom you should have a paragraph description of the Video{'\n'}{'\n'}4. Try to make the sections above and below the videos look nice with text making good use of the space</Text></View>
+          }>When the phone is in Portrait View:    {'\n'}1. You should have a text at the top of the screen that showcases the name of the video.   {'\n'}{'\n'}{'\n'}2. Then in the middle you should have the Video. 
+          <Video
+          ref={video}
+          style={styles.video}
+          source={{
+            uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          }}
+          useNativeControls
+          resizeMode="contain"
+          isLooping
+          onPlaybackStatusUpdate={status => setStatus(() => status)}
+        />{'\n'}"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{'\n'}{'\n'}3. Then at the bottom you should have a paragraph description of the Video{'\n'}{'\n'}4. Try to make the sections above and below the videos look nice with text making good use of the space</Text></View>
       )}
     </View>
   );
