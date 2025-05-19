@@ -57,7 +57,7 @@ export default function App() {
             This is a place where you could have a description of the video or
             some other information. Because the App is in "Portrait" the video
             can only use the width of the screen. Therefore there is a lot of
-            left over space that can be used. When the phone is in LANDSCAPE View:    {'\n'}{'\n'}1. The Video should be taking up the whole screen. {'\n'}{'\n'}2. The Section should not be scrollable. {'\n'}{'\n'}3. Off to the right should be a play/pause button - OR you could make it so the video itself played/paused by touching the play/pause button in the video. 
+            left over space that can be used. When the phone is in LANDSCAPE View:    {'\n'}{'\n'}1. The Video should be taking up the whole screen.{'\n'}{'\n'}Title: Big Buck Bunny{'\n'}{'\n'}2. The Section should not be scrollable. {'\n'}{'\n'}3. Off to the right should be a play/pause button - OR you could make it so the video itself played/paused by touching the play/pause button in the video. 
           </Text>
 
           <Video
@@ -94,7 +94,7 @@ export default function App() {
           }>{`Window Dimensions: height - ${Math.round(dimensions.window.height)} is bigger than width - ${dimensions.window.width}`}</Text>
           <Text style={
             styles.paragraph
-          }>When the phone is in Portrait View:    {'\n'}1. You should have a text at the top of the screen that showcases the name of the video.   {'\n'}{'\n'}{'\n'}2. Then in the middle you should have the Video. 
+          }>When the phone is in Portrait View:    {'\n'}1. You should have a text at the top of the screen that showcases the name of the video.   {'\n'}{'\n'}Title: Big Buck Bunny{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}2. Then in the middle you should have the Video. 
           <Video
           ref={video}
           style={styles.video}
